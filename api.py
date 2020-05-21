@@ -8,8 +8,36 @@ def printStates():
         print(state)
 
 def printDistricts(state):
-    for district in data[state]['districtData']:
+    for district in data[state]['districtData'].values():
         print(district)
+
+def getAllConfirmed():
+    sum = 0
+    for state in data:
+        for district in data[state]['districtData'].values():
+            sum += district['confirmed']
+    return sum
+
+def getAllActive():
+    sum = 0
+    for state in data:
+        for district in data[state]['districtData'].values():
+            sum += district['active']
+    return sum
+
+def getAllDeaths():
+    sum = 0
+    for state in data:
+        for district in data[state]['districtData'].values():
+            sum += district['deceased']
+    return sum
+
+def getAllRecovered():
+    sum = 0
+    for state in data:
+        for district in data[state]['districtData'].values():
+            sum += district['recovered']
+    return sum
 
 def getConfirmed(state, district = ""):
     if (district != ""):
