@@ -11,7 +11,7 @@ def main():
     cont = True
     while cont:
         os.system('cls')
-        print("Hi! This is a COVID-19 information app that answers your queries")
+        print("Hi! This is a COVID-19 information app")
         print("What would you like to know?")
         printMenu()
         choice = int(input("\nChoose option: "))
