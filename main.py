@@ -14,40 +14,48 @@ def main():
         print("Hi! This is a COVID-19 information app")
         print("What would you like to know?")
         printMenu()
-        choice = int(input("\nChoose option: "))
+        choice = input("\nChoose option: ")
+
+        try:
+            choice = int(choice)
+        except:
+            print("Invalid input")
+            pass
 
         if (choice == 6):
             cont = False
+
         elif (choice == 1):
             print("\nIndia has {} confirmed cases".format(api.getAllConfirmed()))
-            print("\nIndia has {} active cases".format(api.getAllActive()))
-            print("\nIndia has {} recovered cases".format(api.getAllRecovered()))
-            print("\nIndia has {} deaths".format(api.getAllDeaths()))
+            print("India has {} active cases".format(api.getAllActive()))
+            print("India has {} recovered cases".format(api.getAllRecovered()))
+            print("India has {} deaths".format(api.getAllDeaths()))
 
         elif (choice == 2):
-            state = input("\nEnter state: ")
+            state = input("\nEnter state: ").capitalize()
 
             if api.isState(state):
                 print("\n{} has {} confirmed cases".format(state, api.getConfirmed(state)))
-                print("\n{} has {} active cases".format(state, api.getActive(state)))
-                print("\n{} has {} recovered cases".format(state, api.getRecovered(state)))
-                print("\n{} has {} deaths".format(state, api.getDeaths(state)))
+                print("{} has {} active cases".format(state, api.getActive(state)))
+                print("{} has {} recovered cases".format(state, api.getRecovered(state)))
+                print("{} has {} deaths".format(state, api.getDeaths(state)))
+                print("\n{} has conducted {} tests".format(state, api.getTests(state)))
 
             else:
                 print("Invalid input")
 
         elif (choice == 3):
-            state = input("\nEnter state: ")
+            state = input("\nEnter state: ").capitalize()
 
             if api.isState(state):
-                district = input("Enter district: ")
+                district = input("Enter district: ").capitalize()
 
                 if api.isDistrict(state, district):
                     print("\n{}, {} has {} confirmed cases".format(district, state, api.getConfirmed(state,district)))
-                    print("\n{}, {} has {} active cases".format(district, state, api.getActive(state,district)))
-                    print("\n{}, {} has {} recovered cases".format(district, state, api.getRecovered(state,district)))
-                    print("\n{}, {} has {} deaths".format(district, state, api.getDeaths(state,district)))
-
+                    print("{}, {} has {} active cases".format(district, state, api.getActive(state,district)))
+                    print("{}, {} has {} recovered cases".format(district, state, api.getRecovered(state,district)))
+                    print("{}, {} has {} deaths".format(district, state, api.getDeaths(state,district)))
+                    print("{}, {} is a {} zone".format(district,state,api.getZone(district)))
                 else:
                     print("Invalid input")
 
