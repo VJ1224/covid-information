@@ -1,7 +1,7 @@
 import api, os, time
 
 def printMenu():
-    print("\n1.Get country information" +
+    print("\n1.Get total information" +
     "\n2.Get state-wise information" +
     "\n3.Get district-wise information" +
     "\n4.Show states \n5.Show districts" +
@@ -35,11 +35,11 @@ def main():
             state = input("\nEnter state: ").capitalize()
 
             if api.isState(state):
-                print("\n{} has {} confirmed cases".format(state, api.getConfirmed(state)))
-                print("{} has {} active cases".format(state, api.getActive(state)))
-                print("{} has {} recovered cases".format(state, api.getRecovered(state)))
-                print("{} has {} deaths".format(state, api.getDeaths(state)))
-                print("\n{} has conducted {} tests".format(state, api.getTests(state)))
+                print("\n{} has {} confirmed cases".format(state, api.getStateConfirmed(state)))
+                print("{} has {} active cases".format(state, api.getStateActive(state)))
+                print("{} has {} recovered cases".format(state, api.getStateRecovered(state)))
+                print("{} has {} deaths".format(state, api.getStateDeaths(state)))
+                print("\n{} has conducted {} tests".format(state, api.getStateTests(state)))
 
             else:
                 print("Invalid input")
@@ -51,11 +51,11 @@ def main():
                 district = input("Enter district: ").capitalize()
 
                 if api.isDistrict(state, district):
-                    print("\n{}, {} has {} confirmed cases".format(district, state, api.getConfirmed(state,district)))
-                    print("{}, {} has {} active cases".format(district, state, api.getActive(state,district)))
-                    print("{}, {} has {} recovered cases".format(district, state, api.getRecovered(state,district)))
-                    print("{}, {} has {} deaths".format(district, state, api.getDeaths(state,district)))
-                    print("{}, {} is a {} zone".format(district,state,api.getZone(district)))
+                    print("\n{}, {} has {} confirmed cases".format(district, state, api.getDistrictConfirmed(state,district)))
+                    print("{}, {} has {} active cases".format(district, state, api.getDistrictActive(state,district)))
+                    print("{}, {} has {} recovered cases".format(district, state, api.getDistrictRecovered(state,district)))
+                    print("{}, {} has {} deaths".format(district, state, api.getDistrictDeaths(state,district)))
+                    print("{}, {} is a {} zone".format(district,state,api.getDistrictZone(district)))
                 else:
                     print("Invalid input")
 

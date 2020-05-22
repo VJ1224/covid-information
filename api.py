@@ -9,77 +9,61 @@ with urllib.request.urlopen("https://api.covid19india.org/zones.json") as url:
 with urllib.request.urlopen("https://api.covid19india.org/state_test_data.json") as url:
     stateTestData = json.load(url)
 
+with urllib.request.urlopen("https://api.covid19india.org/data.json") as url:
+    nationalData = json.load(url)
+
+
 def printStates():
     for state in stateData:
         print(state)
 
 def printDistricts(state):
-    for district in stateData[state]['districtData'].values():
+    for district in stateData[state]['districtData']:
         print(district)
 
 def getAllConfirmed():
-    sum = 0
-    for state in stateData:
-        for district in stateData[state]['districtData'].values():
-            sum += district['confirmed']
-    return sum
+    return nationalData["statewise"][0]["confirmed"]
 
 def getAllActive():
-    sum = 0
-    for state in stateData:
-        for district in stateData[state]['districtData'].values():
-            sum += district['active']
-    return sum
+    return nationalData["statewise"][0]["active"]
 
 def getAllDeaths():
-    sum = 0
-    for state in stateData:
-        for district in stateData[state]['districtData'].values():
-            sum += district['deceased']
-    return sum
+    return nationalData["statewise"][0]["deaths"]
 
 def getAllRecovered():
-    sum = 0
-    for state in stateData:
-        for district in stateData[state]['districtData'].values():
-            sum += district['recovered']
-    return sum
+    return nationalData["statewise"][0]["recovered"]
 
-def getConfirmed(state, district = ""):
-    if (district != ""):
-        return stateData[state]['districtData'][district]['confirmed']
-    else:
-        sum = 0
-        for district in stateData[state]['districtData'].values():
-            sum += district['confirmed']
-        return sum
+def getStateConfirmed(state):
+    for i in range(len(nationalData["statewise"])):
+        if state == nationalData["statewise"][i]["state"]:
+            return nationalData["statewise"][i]["confirmed"]
 
-def getDeaths(state, district = ""):
-    if (district != ""):
-        return stateData[state]['districtData'][district]['deceased']
-    else:
-        sum = 0
-        for district in stateData[state]['districtData'].values():
-            sum += district['deceased']
-        return sum
+def getStateDeaths(state):
+    for i in range(len(nationalData["statewise"])):
+        if state == nationalData["statewise"][i]["state"]:
+            return nationalData["statewise"][i]["deaths"]
 
-def getActive(state, district = ""):
-    if (district != ""):
-        return stateData[state]['districtData'][district]['active']
-    else:
-        sum = 0
-        for district in stateData[state]['districtData'].values():
-            sum += district['active']
-        return sum
+def getStateActive(state):
+    for i in range(len(nationalData["statewise"])):
+        if state == nationalData["statewise"][i]["state"]:
+            return nationalData["statewise"][i]["active"]
 
-def getRecovered(state, district = ""):
-    if (district != ""):
-        return stateData[state]['districtData'][district]['recovered']
-    else:
-        sum = 0
-        for district in stateData[state]['districtData'].values():
-            sum += district['recovered']
-        return sum
+def getStateRecovered(state):
+    for i in range(len(nationalData["statewise"])):
+        if state == nationalData["statewise"][i]["state"]:
+            return nationalData["statewise"][i]["recovered"]
+
+def getDistrictConfirmed(state, district):
+    return stateData[state]['districtData'][district]['confirmed']
+
+def getDistrictDeaths(state, district):
+    return stateData[state]['districtData'][district]['deceased']
+
+def getDistrictActive(state, district):
+    return stateData[state]['districtData'][district]['active']
+
+def getDistrictRecovered(state, district):
+    return stateData[state]['districtData'][district]['recovered']
 
 def isState(s):
     present = False
@@ -95,17 +79,14 @@ def isDistrict(s,d):
             present = True
     return present
 
-def getZone(d):
+def getDistrictZone(d):
     for district in zoneData['zones']:
         if district['district'] == d:
             return district['zone']
 
-def getTests(s):
-    sum = 0
+def getStateTests(s):
+    data = []
     for state in stateTestData['states_tested_data']:
         if state['state'] == s:
-            try:
-                sum += int(state['totaltested'])
-            except:
-                pass
-    return sum
+            data.append(state)
+    return data[-1]['totaltested']
