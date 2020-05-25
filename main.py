@@ -1,4 +1,4 @@
-import api, os, time
+import api, os, time, msvcrt
 
 def printMenu():
     print("\n1.Get total information" +
@@ -14,7 +14,8 @@ def main():
         print("Hi! This is a COVID-19 information app")
         print("What would you like to know?")
         printMenu()
-        choice = input("\nChoose option: ")
+        print("\nChoose option:")
+        choice = msvcrt.getch()
 
         try:
             choice = int(choice)
@@ -55,7 +56,7 @@ def main():
                     print("{}, {} has {} active cases".format(district, state, api.getDistrictActive(state,district)))
                     print("{}, {} has {} recovered cases".format(district, state, api.getDistrictRecovered(state,district)))
                     print("{}, {} has {} deaths".format(district, state, api.getDistrictDeaths(state,district)))
-                    print("{}, {} is a {} zone".format(district,state,api.getDistrictZone(district)))
+                    print("\n{}, {} is a {} zone".format(district,state,api.getDistrictZone(district)))
                 else:
                     print("Invalid input")
 
