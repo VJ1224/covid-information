@@ -33,6 +33,18 @@ def getAllDeaths():
 def getAllRecovered():
     return nationalData["statewise"][0]["recovered"]
 
+def getTodayConfirmed():
+    return nationalData["cases_time_series"][-1]["dailyconfirmed"]
+
+def getTodayDeaths():
+    return nationalData["cases_time_series"][-1]["dailydeceased"]
+
+def getTodayRecovered():
+    return nationalData["cases_time_series"][-1]["dailyrecovered"]
+
+def getTodayDate():
+    return nationalData["cases_time_series"][-1]["date"]
+
 def getStateConfirmed(state):
     for i in range(len(nationalData["statewise"])):
         if state == nationalData["statewise"][i]["state"]:

@@ -4,8 +4,9 @@ def printMenu():
     print("\n1.Get total information" +
     "\n2.Get state-wise information" +
     "\n3.Get district-wise information" +
-    "\n4.Show states \n5.Show districts" +
-    "\n6.Exit")
+    "\n4.Get daily update"
+    "\n5.Show states \n6.Show districts" +
+    "\n7.Exit")
 
 def main():
     cont = True
@@ -23,7 +24,7 @@ def main():
             print("Invalid input")
             pass
 
-        if (choice == 6):
+        if (choice == 7):
             cont = False
 
         elif (choice == 1):
@@ -64,10 +65,16 @@ def main():
                 print("Invalid input")
 
         elif (choice == 4):
+            print("\nDate: {}".format(api.getTodayDate()))
+            print("{} new cases".format(api.getTodayConfirmed()))
+            print("{} recovered".format(api.getTodayRecovered()))
+            print("{} deaths".format(api.getTodayDeaths()))
+
+        elif (choice == 5):
             print("")
             api.printStates()
 
-        elif (choice == 5):
+        elif (choice == 6):
             state = input("\nEnter state: ")
 
             if api.isState(state):
