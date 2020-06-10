@@ -4,11 +4,13 @@ Gives you information regarding the COVID-19 cases in India
 
 ## Features
 
-* Information about total cases
+* Overall status
 
-* Information about state-wise cases and testing
+* State-wise and district-wise information
 
-* Information about district-wise cases and zone
+* State testing information
+
+* Daily status
 
 ## Usage
 
