@@ -21,20 +21,23 @@ def main():
         try:
             choice = int(choice)
         except:
-            print("Invalid input")
+            print("Invalid option")
             pass
 
+        #Exit
         if (choice == 7):
             cont = False
 
+        #Get total information
         elif (choice == 1):
             print("\nIndia has {} confirmed cases".format(api.getAllConfirmed()))
             print("India has {} active cases".format(api.getAllActive()))
             print("India has {} recovered cases".format(api.getAllRecovered()))
             print("India has {} deaths".format(api.getAllDeaths()))
 
+        #Get state-wise information
         elif (choice == 2):
-            state = input("\nEnter state: ").capitalize()
+            state = input("\nEnter state: ")
 
             if api.isState(state):
                 print("\n{} has {} confirmed cases".format(state, api.getStateConfirmed(state)))
@@ -44,13 +47,16 @@ def main():
                 print("\n{} has conducted {} tests".format(state, api.getStateTests(state)))
 
             else:
-                print("Invalid input")
+                print("Invalid state")
 
+        #Get district-wise information
         elif (choice == 3):
-            state = input("\nEnter state: ").capitalize()
+            state = input("\nEnter state: ")
 
             if api.isState(state):
-                district = input("Enter district: ").capitalize()
+                print("")
+                api.printDistricts(state)
+                district = input("\nEnter district: ")
 
                 if api.isDistrict(state, district):
                     print("\n{}, {} has {} confirmed cases".format(district, state, api.getDistrictConfirmed(state,district)))
@@ -59,21 +65,24 @@ def main():
                     print("{}, {} has {} deaths".format(district, state, api.getDistrictDeaths(state,district)))
                     print("\n{}, {} is a {} zone".format(district,state,api.getDistrictZone(district)))
                 else:
-                    print("Invalid input")
+                    print("Invalid district")
 
             else:
-                print("Invalid input")
+                print("Invalid state")
 
+        #Get daily update
         elif (choice == 4):
             print("\nDate: {}".format(api.getTodayDate()))
             print("{} new cases".format(api.getTodayConfirmed()))
             print("{} recovered".format(api.getTodayRecovered()))
             print("{} deaths".format(api.getTodayDeaths()))
 
+        #Show states
         elif (choice == 5):
             print("")
             api.printStates()
 
+        #Show districts
         elif (choice == 6):
             state = input("\nEnter state: ")
 
@@ -82,7 +91,7 @@ def main():
                 api.printDistricts(state)
 
             else:
-                print("Invalid input")
+                print("Invalid state")
 
         if cont:
             input("\nPress enter to restart\n")
