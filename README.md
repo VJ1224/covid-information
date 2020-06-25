@@ -1,4 +1,4 @@
-# Python COVID-19 Information app
+# COVID-19 India Information
 
 Gives you information regarding the COVID-19 cases in India
 
